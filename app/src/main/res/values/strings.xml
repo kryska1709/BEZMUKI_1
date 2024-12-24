@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name" translatable="false">BEZMUKI</string>
+    <string name="title_home" translatable="false">Главная</string>
+    <string name="title_dashboard" translatable="false">Корзина</string>
+    <string name="title_notifications" translatable="false">О нас</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+</resources>

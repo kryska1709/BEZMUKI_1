@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.xzxz.ui.home.HomeFragment"
+        android:label="Главная"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_informs"
+            app:destination="@id/navigation_informs" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_pay"
+            app:destination="@id/navigation_pay" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_dishDetail"
+            app:destination="@id/navigation_dishDetail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_informs"
+        android:name="com.example.xzxz.ui.Informs.InformsFragment"
+        android:label="О нас"
+        tools:layout="@layout/fragment_informs" >
+        <action
+            android:id="@+id/action_navigation_informs_to_navigation_home"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_navigation_informs_to_navigation_pay"
+            app:destination="@id/navigation_pay" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_pay"
+        android:name="com.example.xzxz.ui.pay.PayFragment"
+        android:label="Корзина"
+        tools:layout="@layout/fragment_pay" >
+        <action
+            android:id="@+id/action_navigation_pay_to_navigation_informs"
+            app:destination="@id/navigation_informs" />
+        <action
+            android:id="@+id/action_navigation_pay_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_dishDetail"
+        android:name="com.example.xzxz.ui.home.dishDetailFragment"
+        android:label="Главная"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_dishDetail_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+</navigation>
