@@ -111,6 +111,21 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.DishViewHolder
                 case "тирамису":
                     imageView.setImageResource(R.drawable.tiramisu);
                     break;
+                case "торт красный бархат":
+                    imageView.setImageResource(R.drawable.topt_red_barzh);
+                    break;
+                case "бенто-торт фисташковая меренга":
+                    imageView.setImageResource(R.drawable.bento_mereng);
+                    break;
+                case "торт медовик":
+                    imageView.setImageResource(R.drawable.medovik);
+                    break;
+                case "вода газированная":
+                    imageView.setImageResource(R.drawable.water_gas);
+                    break;
+                case "вода негазированная":
+                    imageView.setImageResource(R.drawable.water_notgas);
+                    break;
             }
 
             itemView.setOnClickListener(v -> listener.onDishClick(dish));

@@ -88,6 +88,21 @@ public class dishDetailFragment extends Fragment {
             case "тирамису":
                 imageView.setImageResource(R.drawable.tiramisu);
                 break;
+            case "торт красный бархат":
+                imageView.setImageResource(R.drawable.topt_red_barzh);
+                break;
+            case "бенто-торт фисташковая меренга":
+                imageView.setImageResource(R.drawable.bento_mereng);
+                break;
+            case "торт медовик":
+                imageView.setImageResource(R.drawable.medovik);
+                break;
+            case "вода газированная":
+                imageView.setImageResource(R.drawable.water_gas);
+                break;
+            case "вода негазированная":
+                imageView.setImageResource(R.drawable.water_notgas);
+                break;
         }
 
         // Инициализация Firebase Database
