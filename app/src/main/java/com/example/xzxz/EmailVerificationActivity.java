@@ -2,9 +2,11 @@ package com.example.xzxz;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -12,60 +14,34 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class EmailVerificationActivity extends AppCompatActivity {
 
-    private Button resendButton;
     private Button verifyButton;
     private FirebaseAuth mAuth;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_verification);
         mAuth = FirebaseAuth.getInstance();
         verifyButton = findViewById(R.id.verifyButton);
 
-        resendButton.setOnClickListener(v -> {
-            FirebaseUser user = mAuth.getCurrentUser();
-            if (user != null) {
-                user.sendEmailVerification()
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(getApplicationContext(), "Подтверждающее письмо отправлено повторно.", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Ошибка отправки подтверждающего письма.", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            }
-        });
-
-        verifyButton.setOnClickListener(v -> {
-            FirebaseUser user = mAuth.getCurrentUser();
-            if (user != null) {
-                user.reload().addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        user.reload();
-                        if (user.isEmailVerified()) {
-                            // Переход на MainActivity
-                            startActivity(new Intent(EmailVerificationActivity.this, MainActivity.class));
-                            finish(); // Закрыть текущую активность
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Почта еще не подтверждена.", Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Ошибка проверки подтверждения почты.", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
+        verifyButton.setOnClickListener(v -> verifyEmail());
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+    private void verifyEmail() {
         FirebaseUser user = mAuth.getCurrentUser();
-        if (user != null && user.isEmailVerified()) {
-            // Переход на MainActivity
-            startActivity(new Intent(EmailVerificationActivity.this, MainActivity.class));
-            finish(); // Закрыть текущую активность
+        if (user != null) {
+            user.reload().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    if (user.isEmailVerified()) {
+                        Toast.makeText(getApplicationContext(), "Email подтвержден. Переход на MainActivity.", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(EmailVerificationActivity.this, MainActivity.class));
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Email не подтвержден. Пожалуйста, проверьте свою почту.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Ошибка проверки email.", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 }

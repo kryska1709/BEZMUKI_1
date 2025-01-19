@@ -56,7 +56,6 @@ public class reggg extends AppCompatActivity {
                                             Toast.makeText(getApplicationContext(), "Пользователь зарегистрирован. Почта подтверждена", Toast.LENGTH_SHORT).show();
                                             // Переход на EmailVerificationActivity
                                             startActivity(new Intent(reggg.this, MainActivity.class));
-                                            finish(); // Закрыть текущую активность
                                         } else {
                                             Toast.makeText(getApplicationContext(), "Ошибка отправки подтверждающего письма.", Toast.LENGTH_SHORT).show();
                                         }

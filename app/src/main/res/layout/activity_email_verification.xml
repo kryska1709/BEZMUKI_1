@@ -31,7 +31,9 @@
         android:id="@+id/verifyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onClick"
         android:padding="12dp"
-        android:text="подтвердить"
-        android:textColor="@android:color/white" />
+        android:text="Готово"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
 </LinearLayout>
