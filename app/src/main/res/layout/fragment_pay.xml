@@ -9,20 +9,38 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_cart"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_clear_order"
+        android:layout_height="590dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button_clear_order"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:text="Очистить корзину"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="384dp"
+        android:layout_height="132dp"
+        android:orientation="horizontal"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/button_clear_order"
+            android:layout_width="105dp"
+            android:layout_height="65dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:text="Очистить корзину"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/button_order"
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:text="заказать"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

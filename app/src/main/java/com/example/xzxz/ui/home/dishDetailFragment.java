@@ -39,7 +39,7 @@ public class dishDetailFragment extends Fragment {
         // Установите данные
         nameTextView.setText(dish.getName());
         descriptionTextView.setText(dish.getDescription());
-        priceTextView.setText(dish.getPrice());
+        priceTextView.setText(String.valueOf(dish.getPrice()));
 
         // Установка изображения в зависимости от названия блюда
         switch (dish.getName()) {
