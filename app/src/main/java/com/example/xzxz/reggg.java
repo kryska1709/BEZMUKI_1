@@ -1,6 +1,6 @@
 package com.example.xzxz;
 
-import android.content.Intent; // Импортируем Intent
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -13,8 +13,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.HashMap;
 
 public class reggg extends AppCompatActivity {
 
@@ -40,9 +38,7 @@ public class reggg extends AppCompatActivity {
         });
     }
 
-
     private void registerUser(String email, String password) {
-
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             Toast.makeText(getApplicationContext(), "Пожалуйста, заполните все поля", Toast.LENGTH_SHORT).show();
             return;
@@ -53,14 +49,26 @@ public class reggg extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         if (user != null) {
-                            // Удален блок записи и создания таблицы
-                            Toast.makeText(getApplicationContext(), "Пользователь зарегистрирован", Toast.LENGTH_SHORT).show();
-                            // Переход на MainActivity
-                            startActivity(new Intent(reggg.this, MainActivity.class));
-                            finish(); // Закрыть текущую активность
+                            // Отправка подтверждающего письма
+                            user.sendEmailVerification()
+                                    .addOnCompleteListener(sendTask -> {
+                                        if (sendTask.isSuccessful()) {
+                                            Toast.makeText(getApplicationContext(), "Пользователь зарегистрирован. Почта подтверждена", Toast.LENGTH_SHORT).show();
+                                            // Переход на EmailVerificationActivity
+                                            startActivity(new Intent(reggg.this, MainActivity.class));
+                                            finish(); // Закрыть текущую активность
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), "Ошибка отправки подтверждающего письма.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                         }
                     } else {
-                        Toast.makeText(getApplicationContext(), "Ошибка регистрации.Проверьте правильно ли вы ввели почту и пароль", Toast.LENGTH_SHORT).show();
+                        Exception exception = task.getException();
+                        if (exception != null && exception.getMessage().contains("The email address is badly formatted")) {
+                            Toast.makeText(getApplicationContext(), "Почта не существует", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Ошибка регистрации. Проверьте правильно ли вы ввели почту и пароль.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
     }
